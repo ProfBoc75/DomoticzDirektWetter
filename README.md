@@ -65,7 +65,8 @@ Manually launch
 Then check missing python modules and the login credential if they are ok:
 
     DomoticzDirektWetter.log
-    Go to to your Domoticz web site and check that the both Temperature Devices are updated.
+
+Go to to your Domoticz web site and check that the both Temperature Devices are updated.
 
 ## To get all History
 
