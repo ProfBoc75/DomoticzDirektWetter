@@ -65,6 +65,7 @@ Manually launch
 Then check missing python modules and the login credential if they are ok:
 
     DomoticzDirektWetter.log
+    Go to to your Domoticz web site and check that the both Temperature Devices are updated.
 
 ## To get all History
 
@@ -72,6 +73,6 @@ Then check missing python modules and the login credential if they are ok:
         #getHistory(token)
         #logging.info("getHistory values successfully!")
 
-## Add to your cron tab (with crontab -e): (will start every hour at 5)
+## Add to your cron tab (with crontab -e): (will start every hour at 2 , not before to let the station updates hourly values in the Cloud)
 
-    5 * * * * /usr/bin/python3 /home/pi/domoticz/scripts/python/DomoticzDirektWetter/direktwetter.py >/dev/null 2>&1
+    2 * * * * /usr/bin/python3 /home/pi/domoticz/scripts/python/DomoticzDirektWetter/direktwetter.py >/dev/null 2>&1
