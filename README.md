@@ -1,13 +1,17 @@
 # DomoticzDirektWetter
   Import Weather Station WD2000 to Domoticz, Technoline, ALDI 
 
+  Dev still on going, missing Temperature_Calendar (lot of work to get min, avg and max value / day since all values are hourly)  and number of days to import (take all history)
+  
+  To save batteries, the station WD2000 connects to the Wifi only once per hour (if not connected with the USB cable to power supply).
+
 # Pre-requisit : 
 
   You must have installed the smartphone application DirektWetter (Android or iOS), fully setup your Weather Station WD2000, including the user registration.
   And be sure that you have information uploaded from your station in the application.
   This information are coming from cloud.technoline.info and DomoticzDirektWetter is using json API to get values.
 
-  Note: This program is largely inspired by https://github.com/Scrat95220/DomoticzGazpar with the same approach.
+  Note: This script is largely inspired by https://github.com/Scrat95220/DomoticzGazpar with the same approach.
 
 # create devices in Domoticz
 - In Domoticz, go to Setup/hardware, add or reuse a Dummy Hardware (Does nothing, use for virtual switches only)
@@ -50,16 +54,23 @@ NB_DAYS_IMPORTED is not yet implemented, here for future updates.
 
 Configuration file will not be deleted in future updates.
 
-## testing before launch
+## testing launch
 
 Manually launch
 
+    cd /home/pi/domoticz/scripts/python/DomoticzDirektWetter
     chmod +x direktwetter.py
     ./direktwetter.py
 
 Then check missing python modules and the login credential if they are ok:
 
     DomoticzDirektWetter.log
+
+## To get all History
+
+    Uncomment the 2 lines at the end of the script (to be improved later with NB_DAY_IMPORTED)
+        #getHistory(token)
+        #logging.info("getHistory values successfully!")
 
 ## Add to your cron tab (with crontab -e): (will start every hour at 5)
 
