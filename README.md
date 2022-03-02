@@ -3,7 +3,8 @@
 
   Dev still on going, missing Temperature_Calendar (lot of work to get min, avg and max value / day since all values are hourly)  and number of days to import (take all history)
   
-  To save batteries, the station WD2000 connects to the Wifi only once per hour (if not connected with the USB cable to power supply).
+  To save batteries, the station WD2000 connects to the Wifi only once per hour (if not connected with the USB cable to power supply). 
+  The values are updated every 57 secondes with the USB power supply, the Wifi stays always on in that situation.
 
 # Pre-requisit : 
 
@@ -74,6 +75,16 @@ Go to to your Domoticz web site and check that the both Temperature Devices are 
         #getHistory(token)
         #logging.info("getHistory values successfully!")
 
-## Add to your cron tab (with crontab -e): (will start every hour at 2 , not before to let the station updates hourly values in the Cloud)
+## Add to your cron tab (with crontab -e): 
+
+Will start every hour at 2 , not before to let the station updates hourly values in the Cloud (under batteries)
 
     2 * * * * /usr/bin/python3 /home/pi/domoticz/scripts/python/DomoticzDirektWetter/direktwetter.py >/dev/null 2>&1
+
+Will start every minute (with USB Power Supply)
+
+    * * * * * /usr/bin/python3 /home/pi/domoticz/scripts/python/DomoticzDirektWetter/direktwetter.py >/dev/null 2>&1
+
+## Known Issues:
+
+In Domoticz, the virtual sensors are selves updated every 5 mn by Domoticz to add Dewpoint but unfortunatly this may add wrong values like sawtooth. I will try to update sensors with the Domoticz json/AP (hope soon) to see if any improvement here.
